@@ -1,7 +1,12 @@
-CROSS_CC=riscv64-linux-gnu-
+CROSS_CC=$(which riscv64-linux-gnu-gcc)
+CROSS_OBJCOPY=$(which riscv64-linux-gnu-objcopy)
+CROSS_STRIP=$(which riscv64-linux-gnu-strip)
+CROSS_NM=$(which riscv64-linux-gnu-nm)
+CROSS_RANLIB=$(which riscv64-linux-gnu-nm)
+
 ./bootstrap && \
-./configure --disable-werror --target=riscv64 --with-platform=efi TARGET_CC=${CROSS_CC}gcc TARGET_OBJCOPY=${CROSS_CC}objcopy \
-TARGET_STRIP=${CROSS_CC}strip TARGET_NM=${CROSS_CC}nm TARGET_RANLIB=${CROSS_CC}nm \
+./configure --disable-werror --target=riscv64 --with-platform=efi TARGET_CC=CROSS_CC TARGET_OBJCOPY=CROSS_OBJCOPY \
+TARGET_STRIP=CROSS_STRIP TARGET_NM=CROSS_NM TARGET_RANLIB=CROSS_RANLIB \
 prefix=$(realpath .) && \
 
 make && \
